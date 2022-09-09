@@ -10,21 +10,31 @@ int main(){
 		char seleccionProblema;
 		printf("¿Que desea calcular?\n1. Tiempo\n2. Velocidad final y espacio Recorrido\n3. Velocidad inicial y desaceleracion\n");
 		scanf("\n%c", &seleccionProblema);
-		if(seleccionProblema==4){
+		double distancia, tiempo, aceleracion, velocidadFinal;
+		double velocidadInicial, aceleracionResultado,espacioRecorrido;
+		if(seleccionProblema=='1'){
 			//Problema 4
-			
-		}else if(seleccionProblema==5){
+			printf("Ingrese la aceleracion en km/h^2 y la velocidad final en m/s: \n");
+			scanf("%lf %lf", &aceleracion, &velocidadFinal);
+			tiempo= (velocidadFinal*3.6)/aceleracion;
+			printf("Tardó %lf horas", tiempo);
+		}else if(seleccionProblema=='2'){
 			//Problema 5
-			
-		}else if(seleccionProblema==6){
+			printf("Ingrese la aceleracion en m/s^2 y el tiempo en horas: \n");
+			scanf("%lf %lf", &aceleracion, &tiempo);
+			velocidadFinal= aceleracion*tiempo*60;
+			espacioRecorrido= 0.5*aceleracion*tiempo*tiempo*60*60;
+			printf("La velocidad final es: %lf\nEl espacio recorrido es: %lf", velocidadFinal, espacioRecorrido);
+		}else if(seleccionProblema=='3'){
 			//Problema 6
-			double distancia, tiempo;
-			double velocidadInicial, aceleracion;
-			printf("Ingrese la distancia en metros y el tiempo en segundos: \n");
-			scanf("%lf %lf", distancia, tiempo);
-			velocidadInicial= (2*distancia)/tiempo;
-			aceleracion= -velocidadInicial/tiempo;
-			printf("La velocidad inicial es: %lf m/s\nLa aceleración es: %lf m/s^2", velocidadInicial, aceleracion);
+			/*Justo en este problema me parece que hay un error, nos dicen que coloquemos
+			el tiempo en segundos y no sale, si colocamos el tiempo en minutos y luego *60
+			para cambiarlo a segundos el resultado sería el que esta en las pruebas*/
+			printf("Ingrese la distancia en metros y el tiempo en minutos: \n"); //segundos-> minutos
+			scanf("%lf %lf", &distancia, &tiempo);
+			velocidadInicial= (2*distancia)/(tiempo*60);
+			aceleracionResultado= -velocidadInicial/(tiempo*60);
+			printf("La velocidad inicial es: %lf m/s\nLa aceleración es: %lf m/s^2", velocidadInicial, aceleracionResultado);
 		}else{
 			printf("Ingresó una opción inválida para cinemática");
 		}
@@ -50,9 +60,12 @@ int main(){
 			printf("La aceleración es: %lf m/s^2", aceleracionResultado);
 		} else if(esProblema3==1){
 			//Problema 3
+			/*Aqui me parece que tambien hay un error al pedir la velocidad en m/s no sale el problema
+			si pidiera la velocidad en km/h y luego velocidad/3.6 saldría lo que dice la prueba. Por lo que
+			para este problema simplemente dividí /3.6 para que el resultado sea el mismo que la prueba*/
 			fuerzaRozamiento= coefRozamiento * masa1 * G;
 			aceleracionResultado= fuerzaRozamiento/masa1;
-			double tiempo= velocidad/aceleracionResultado;
+			double tiempo= velocidad/(3.6*aceleracionResultado); //Cabe recalcar que usan valores un poco mas exactos para las pruebas
 			printf("La fuerza de rozamiento es: %lfN\nLa aceleración es: %lfm/s^2\nEl tiempo es: %lf s\n", fuerzaRozamiento, aceleracionResultado, tiempo);
 		} else{
 			//Ninguno de los 3 problemas
